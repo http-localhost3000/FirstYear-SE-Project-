@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useApp } from '@/data/store';
 import EarthyBackground from '@/components/EarthyBackground';
+import DatePicker from '@/components/DatePicker';
 import './add-child.css';
 
 export default function AddChildPage() {
@@ -111,13 +112,12 @@ export default function AddChildPage() {
 
           <div className="input-group">
             <label className="input-label" htmlFor="child-dob">Date of Birth</label>
-            <input
+            <DatePicker
               id="child-dob"
-              className={`input-field ${errors.dob ? 'input-error' : ''}`}
-              type="date"
               value={form.dob}
-              onChange={e => handleChange('dob', e.target.value)}
+              onChange={(val) => handleChange('dob', val)}
               max={new Date().toISOString().split('T')[0]}
+              error={!!errors.dob}
             />
             {errors.dob && <span className="field-error">{errors.dob}</span>}
           </div>

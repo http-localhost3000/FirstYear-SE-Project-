@@ -58,9 +58,10 @@ export default function RootLayout({ children }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <meta name="description" content="FirstYears — Digital Child Vaccination Record & Reminder. Never miss a vaccine, never lose a record." />
-        <meta name="theme-color" content="#8F2318" />
         <title>FirstYears — Digital Vaccination Record</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+        <link rel="shortcut icon" href="/icon.svg" />
+        <link rel="apple-touch-icon" href="/icon.svg" />
       </head>
       <body>
         <AppProvider>

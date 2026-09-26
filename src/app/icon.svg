@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient (FirstYears Terracotta to Marigold) -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BD5A4E"/>
+      <stop offset="50%" stop-color="#8F2318"/>
+      <stop offset="100%" stop-color="#E9884F"/>
+    </linearGradient>
+
+    <!-- Face Fill Gradient -->
+    <linearGradient id="faceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF5EE"/>
+      <stop offset="100%" stop-color="#FEE7DC"/>
+    </linearGradient>
+
+    <!-- Heart Shield Gradient -->
+    <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F43F5E"/>
+      <stop offset="100%" stop-color="#BE123C"/>
+    </linearGradient>
+
+    <!-- Soft Glow Filter -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#5C120B" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Outer Rounded Squircle Container -->
+  <rect x="16" y="16" width="480" height="480" rx="140" fill="url(#bgGrad)" filter="url(#softGlow)"/>
+
+  <!-- Inner Soft Ring -->
+  <rect x="32" y="32" width="448" height="448" rx="124" fill="none" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="8"/>
+
+  <!-- Baby Head -->
+  <circle cx="256" cy="276" r="148" fill="url(#faceGrad)"/>
+
+  <!-- Hair Tuft / Lock -->
+  <path d="M256 128 C240 100 270 76 284 94 C296 110 276 128 256 128 Z" fill="#8F2318"/>
+
+  <!-- Cheerful Eyes (Happy Arcs) -->
+  <path d="M196 256 Q214 236 232 256" fill="none" stroke="#5C120B" stroke-width="14" stroke-linecap="round"/>
+  <path d="M280 256 Q298 236 316 256" fill="none" stroke="#5C120B" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- Rosy Cheeks -->
+  <ellipse cx="184" cy="284" rx="22" ry="14" fill="#FB7185" opacity="0.6"/>
+  <ellipse cx="328" cy="284" rx="22" ry="14" fill="#FB7185" opacity="0.6"/>
+
+  <!-- Happy Smile -->
+  <path d="M228 296 Q256 332 284 296" fill="none" stroke="#8F2318" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Small Protection Badge / Heart on top corner -->
+  <g transform="translate(330, 110) scale(1.4)">
+    <circle cx="24" cy="24" r="32" fill="#FFFFFF" filter="url(#softGlow)"/>
+    <path d="M24 38 L14 27 C9 22 9 14 15 9 C20 5 24 10 24 10 C24 10 28 5 33 9 C39 14 39 22 34 27 Z" fill="url(#heartGrad)"/>
+  </g>
+</svg>
