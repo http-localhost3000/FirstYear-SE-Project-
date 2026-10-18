@@ -1,11 +1,44 @@
 'use client';
 
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { jsPDF } from 'jspdf';
 import { useApp } from '@/data/store';
 import { VACCINE_CATALOG } from '@/data/vaccines';
 import BottomNav from '@/components/BottomNav';
 import './certificates.css';
+
+function exportVaccinationHistory(child, records) {
+  const doc = new jsPDF();
+
+  doc.setFontSize(18);
+  doc.text('Vaccination History', 20, 20);
+
+  doc.setFontSize(12);
+  doc.text(`Child: ${child.childName || 'Child'}`, 20, 35);
+  doc.text(`Generated: ${new Date().toLocaleDateString('en-IN')}`, 20, 45);
+
+  let y = 60;
+
+  records.forEach((record, index) => {
+    if (y > 260) {
+      doc.addPage();
+      y = 20;
+    }
+
+    doc.text(`${index + 1}. ${record.vaccine?.name || 'Vaccine'}`, 20, y);
+    doc.text(
+      `Date: ${record.completedDate ? new Date(record.completedDate).toLocaleDateString('en-IN') : 'Not completed'}`,
+      25,
+      y + 8
+    );
+
+    y += 20;
+  });
+
+  doc.save('vaccination-history.pdf');
+}
 
 export default function CertificatesPage() {
   const router = useRouter();
@@ -20,6 +53,7 @@ export default function CertificatesPage() {
 
   const certificates = getChildCertificates() || [];
   const records = getChildRecords() || [];
+
 
   // Match certificates with records and child facts
   const displayCerts = certificates.map(cert => {
@@ -40,6 +74,12 @@ export default function CertificatesPage() {
             <p className="certs-subtitle">Verified digital vaccination records</p>
           </div>
         </header>
+        <button
+          className="btn btn-primary"
+          onClick={() => exportVaccinationHistory(activeChild, records)}
+        >
+          Download Vaccination History (PDF)
+        </button>
 
         {/* Info card */}
         <div className="certs-banner card animate-scale-in">
@@ -71,7 +111,7 @@ export default function CertificatesPage() {
                 </div>
                 <div className="cert-item-right">
                   <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="var(--text-accent)" strokeWidth="2.5" strokeLinecap="round">
-                    <path d="M6 4l4 4-4 4"/>
+                    <path d="M6 4l4 4-4 4" />
                   </svg>
                 </div>
               </div>
@@ -81,7 +121,7 @@ export default function CertificatesPage() {
               <span className="empty-icon">📜</span>
               <h3>No Certificates Ready</h3>
               <p>Once you mark a vaccine as completed, its digital certificate will appear here.</p>
-              <button 
+              <button
                 className="btn btn-primary btn-sm"
                 onClick={() => router.push('/vaccines')}
                 id="certs-mark-vaccine"
